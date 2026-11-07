@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>对象信息与轴点</title><link rel="stylesheet" href="panel.css"><link rel="stylesheet" href="stepper.css">
+</head>
+<body>
+<header class="app-header"><div><span class="eyebrow">ZHI · OBJECT INSPECTOR</span><h1>对象信息与轴点</h1></div><button id="refresh" class="icon-button" title="重新读取当前选择" aria-label="刷新">↻</button></header>
+<div id="status" role="status" aria-live="polite">正在连接 SketchUp…</div>
+<main>
+  <section id="empty" class="empty"><div class="empty-cube">◇</div><h2>选中一个组或组件</h2><p id="empty-message">保持面板打开，切换选择即可查看。</p></section>
+  <div id="content" hidden>
+    <section class="identity"><div class="identity-line"><span id="type" class="badge"></span><h2 id="object-name"></h2><span id="solid" class="badge quiet"></span></div><p id="path" class="path"></p><div class="meta-line"><span id="tag"></span><span id="instances"></span></div></section>
+    <section class="card position-card">
+      <div class="section-head"><h2><span class="section-number">01</span> 按坐标移动物体</h2><span class="unit">显示单位 mm</span></div>
+      <p class="hint">编辑坐标或点击 ▲▼，移动整个物体；朝向和尺寸不变。</p>
+      <div class="step-panel">
+        <div class="step-controls"><label for="step-value">移动步长 <span>mm</span><input id="step-value" type="text" inputmode="decimal" value="10" autocomplete="off" aria-label="移动步长" title="正数；可输入 10、2.5mm、3.2cm"></label><label for="step-series">尺寸系列<select id="step-series" aria-label="尺寸系列"></select></label></div>
+        <div id="step-presets" class="step-presets" role="group" aria-label="常用模数步长"></div>
+        <p id="step-help" class="hint">▲ 增加 / ▼ 减少一个步长，不吸附网格。预设是常用值，工程尺寸以图纸为准。</p>
+      </div>
+      <form id="world-form" class="coord-form" data-space="world">
+        <div class="form-heading"><h3>世界坐标</h3><span>相对模型原点</span></div>
+        <div class="coord-row"><label class="axis-x">X<input id="world-x" name="x" type="text" inputmode="decimal" autocomplete="off" aria-label="世界 X 坐标"></label><label class="axis-y">Y<input id="world-y" name="y" type="text" inputmode="decimal" autocomplete="off" aria-label="世界 Y 坐标"></label><label class="axis-z">Z<input id="world-z" name="z" type="text" inputmode="decimal" autocomplete="off" aria-label="世界 Z 坐标"></label><button type="submit" class="apply">应用</button></div>
+      </form>
+      <form id="parent-form" class="coord-form" data-space="parent">
+        <div class="form-heading"><h3>父级坐标</h3><span>相对直接父级的轴</span></div>
+        <div class="coord-row"><label class="axis-x">X<input id="parent-x" name="x" type="text" inputmode="decimal" autocomplete="off" aria-label="父级 X 坐标"></label><label class="axis-y">Y<input id="parent-y" name="y" type="text" inputmode="decimal" autocomplete="off" aria-label="父级 Y 坐标"></label><label class="axis-z">Z<input id="parent-z" name="z" type="text" inputmode="decimal" autocomplete="off" aria-label="父级 Z 坐标"></label><button type="submit" class="apply">应用</button></div>
+      </form>
+      <div class="hint bottom-hint">Enter 应用 · Esc 还原输入 · 可输入 1200、25cm、1.2m</div><p id="position-warning" class="warning" hidden></p>
+    </section>
+    <section class="card axis-card">
+      <div class="section-head"><h2><span class="section-number">02</span> 原位修改轴点</h2><label class="toggle"><input id="overlay" type="checkbox" checked>模型预览</label></div>
+      <p class="hint">悬停预览，点击立即改轴。<strong>物体不移动，轴向不改变。</strong></p>
+      <div class="cube-wrap">
+        <svg id="cube" viewBox="0 0 480 240" role="group" aria-label="包围框快捷轴点；拖动空白区域旋转示意"><g id="cube-faces"></g><g id="cube-lines"></g><g id="cube-axes"></g><g id="cube-points"></g></svg>
+        <button id="reset-view" class="small ghost">重置视角</button><span class="cube-caption">局部轴示意 · 拖动旋转</span>
+      </div>
+      <div id="target-readout" class="target-readout"><strong>15 个快捷点位</strong><span>8 角点 · 6 面心 · 1 中心</span></div>
+      <div class="point-section"><div class="point-title">面心与中心</div><div id="face-buttons" class="point-grid faces"></div></div>
+      <div class="point-section"><div class="point-title">角点 <span>按对象局部 X / Y / Z 区分</span></div><div id="corner-buttons" class="point-grid corners"></div></div>
+      <div class="scope-row"><label for="scope">共享组件</label><select id="scope"><option value="unique">仅当前实例（默认）</option><option value="linked">所有同定义实例一起改轴</option></select></div>
+      <p id="scope-hint" class="hint"></p><p id="axis-warning" class="warning" hidden></p>
+    </section>
+    <details class="card details" open><summary>基本信息与尺寸 <span>沿局部轴 / 世界轴</span></summary><dl id="info-list"></dl><button id="copy-info" class="small ghost">复制对象信息</button></details>
+    <footer>Ctrl+Z 撤销 · 原位改轴使用对象局部包围框 · 坐标不受绘图轴显示位置影响</footer>
+  </div>
+</main>
+<script src="panel.js"></script>
+</body>
+</html>

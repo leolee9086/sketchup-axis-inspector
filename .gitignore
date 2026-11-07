@@ -1,0 +1,11 @@
+# 本机验收结果、模型、过程笔记和安装产物不进入公开仓库。
+/docs/
+/release/
+/dist/
+*.skp
+*.skb
+*.rbz
+*.bak
+*.log
+.DS_Store
+Thumbs.db

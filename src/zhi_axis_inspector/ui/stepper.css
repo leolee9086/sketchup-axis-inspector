@@ -1,0 +1,21 @@
+/* 步长与坐标步进：保持窄面板可用，并给箭头清晰的独立点击区域。 */
+.step-panel{background:#f4f8fa;border:1px solid #deeaef;border-radius:8px;padding:10px;margin:12px 0}
+.step-controls{display:grid;grid-template-columns:minmax(100px,1fr) minmax(180px,1.8fr);gap:12px}
+.step-controls label{font-size:11px;color:#5f7583;display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.step-controls label span{font-size:10px;color:#8a9aa5}
+.step-controls input,.step-controls select{width:100%;border:1px solid #cfdee7;background:#fff;color:var(--ink);border-radius:6px;padding:7px 8px;font-size:12px;min-width:0}
+.step-presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.step-presets button{font-size:11px;padding:4px 9px;min-width:38px}
+.step-presets button.active{background:#dcedf6;border-color:#7daec6;color:#235d78}
+#step-help{font-size:10px;margin:7px 0 0}
+.coord-row{gap:7px;grid-template-columns:repeat(3,minmax(0,1fr)) 45px}
+.coord-field{display:flex;min-width:0;background:#f6f8fa;border-radius:6px;border-bottom:2px solid currentColor;overflow:hidden}
+.coord-row .coord-field label{border:0;border-radius:0;flex:1;min-width:0;padding:1px 4px 1px 6px;gap:4px}
+.coord-row .coord-field input{font-size:11px;padding:10px 0}
+.coord-arrows{display:flex;flex-direction:column;flex:0 0 23px;border-left:1px solid #e0e7ec}
+.coord-arrows button{border:0;border-radius:0;padding:1px 0;height:21px;font-size:9px;line-height:19px;background:#eef4f7;color:currentColor}
+.coord-arrows button+button{border-top:1px solid #e0e7ec}
+.coord-arrows button:hover:not(:disabled){background:#d4e8f2}
+.coord-arrows button:active:not(:disabled){background:#b8d9e9}
+.coord-arrows button:focus-visible{outline-offset:-3px}
+@media(max-width:520px){.coord-row{gap:4px;grid-template-columns:repeat(3,minmax(0,1fr)) 39px}.coord-arrows{flex-basis:20px}.coord-row .coord-field label{padding-left:4px;gap:2px}.coord-row .coord-field input{font-size:10px}.step-controls{gap:8px}}
