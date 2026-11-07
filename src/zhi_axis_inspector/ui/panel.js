@@ -250,6 +250,7 @@
   $('cube').addEventListener('pointercancel',()=>{drag=null;});
   $('reset-view').addEventListener('click',()=>{yaw=-.7;pitch=.48;renderCube();});
   $('refresh').addEventListener('click',()=>call('refresh'));
+  $('open-shrink').addEventListener('click',()=>call('open_shrink'));
   $('scope').addEventListener('change',updateScopeHint);
   $('overlay').addEventListener('change',e=>call('overlay',e.target.checked));
   $('copy-info').addEventListener('click',()=>{

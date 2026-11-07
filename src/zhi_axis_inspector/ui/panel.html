@@ -8,6 +8,7 @@
 <header class="app-header"><div><span class="eyebrow">ZHI · OBJECT INSPECTOR</span><h1>对象信息与轴点</h1></div><button id="refresh" class="icon-button" title="重新读取当前选择" aria-label="刷新">↻</button></header>
 <div id="status" role="status" aria-live="polite">正在连接 SketchUp…</div>
 <main>
+  <section class="card"><div class="section-head"><h2>收缩盒子</h2><button id="open-shrink" type="button" class="small ghost">打开</button></div><p class="hint">按实际几何调整轴向与轴点，让外框贴合内容。支持多选，物体保持原位。</p></section>
   <section id="empty" class="empty"><div class="empty-cube">◇</div><h2>选中一个组或组件</h2><p id="empty-message">保持面板打开，切换选择即可查看。</p></section>
   <div id="content" hidden>
     <section class="identity"><div class="identity-line"><span id="type" class="badge"></span><h2 id="object-name"></h2><span id="solid" class="badge quiet"></span></div><p id="path" class="path"></p><div class="meta-line"><span id="tag"></span><span id="instances"></span></div></section>

@@ -6,8 +6,8 @@ module Zhi
   module AxisInspector
     unless const_defined?(:EXTENSION)
       EXTENSION = SketchupExtension.new('对象信息与轴点', 'zhi_axis_inspector/main')
-      EXTENSION.description = '实时查看组/组件信息，编辑轴点世界/父级坐标移动物体，点击包围框15点原位改轴。'
-      EXTENSION.version = '1.1.0'
+      EXTENSION.description = '查看组/组件信息、编辑坐标与步进、15点原位改轴；通用收缩盒子，保持几何原位。'
+      EXTENSION.version = '1.2.0'
       EXTENSION.creator = '织 / leolee9086'
       EXTENSION.copyright = '2026 织 / leolee9086'
       register = Sketchup.method(:register_extension)

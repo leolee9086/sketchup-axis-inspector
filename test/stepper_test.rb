@@ -169,6 +169,8 @@ module ZhiAxisStepperTest
           @model.commit_operation
           API.refresh
           output(true)
+          API.instance_variable_get(:@dialog)&.close
+          load File.join(__dir__,'shrink_startup.rb')
         end
       end
     end

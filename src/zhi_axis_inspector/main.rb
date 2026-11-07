@@ -3,6 +3,7 @@ require 'sketchup.rb'
 require 'json'
 require_relative 'core'
 require_relative 'overlay'
+require_relative 'shrink_ui'
 
 module Zhi
   module AxisInspector
@@ -39,6 +40,7 @@ module Zhi
         style: UI::HtmlDialog::STYLE_DIALOG)
       @dialog.add_action_callback('ready') { |_ctx| @ready = true; refresh }
       @dialog.add_action_callback('refresh') { |_ctx| refresh }
+      @dialog.add_action_callback('open_shrink') { |_ctx| ShrinkUI.open }
       @dialog.add_action_callback('hover') { |_ctx, json| preview(JSON.parse(json)) }
       @dialog.add_action_callback('move_axis') { |_ctx, json| apply_request('axis', JSON.parse(json)) }
       @dialog.add_action_callback('move_position') { |_ctx, json| apply_request('position', JSON.parse(json)) }
@@ -264,6 +266,25 @@ module Zhi
       show_toolbar if first || previous == TB_VISIBLE
       Sketchup.write_default('ZhiAxisInspector', 'toolbar_initialized', true) if first
       @ui_registered = true
+    end
+
+    # 独立注册标记兼容运行中的 1.1.0 热升级，避免重复添加原入口。
+    unless @shrink_ui_registered
+      @shrink_command = UI::Command.new('收缩盒子') { ShrinkUI.open }
+      @shrink_command.tooltip = '收缩盒子：按实际几何收紧组／组件外框'
+      @shrink_command.status_bar_text = '调整轴向和轴点，内容保持原位；支持多选及共享定义。'
+      @shrink_command.small_icon = @shrink_command.large_icon = File.join(__dir__,'icons','shrink.svg')
+      @shrink_command.set_validation_proc do
+        selection=Sketchup.active_model.selection.to_a
+        !selection.empty? && selection.all? { |e| Core.container?(e) } ? MF_ENABLED : MF_GRAYED
+      end
+      UI.menu('Extensions').add_item(@shrink_command)
+      UI.add_context_menu_handler do |menu|
+        selection=Sketchup.active_model.selection.to_a
+        menu.add_item(@shrink_command) if !selection.empty? && selection.all? { |e| Core.container?(e) }
+      end
+      @toolbar.add_item(@shrink_command)
+      @shrink_ui_registered=true
     end
   end
 end

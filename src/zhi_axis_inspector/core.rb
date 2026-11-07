@@ -4,7 +4,7 @@ require 'securerandom'
 
 module Zhi
   module AxisInspector
-    VERSION = '1.1.0' unless const_defined?(:VERSION)
+    VERSION = '1.2.0' unless const_defined?(:VERSION)
     class AxisError < StandardError; end
 
     module Core

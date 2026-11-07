@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>收缩盒子</title><link rel="stylesheet" href="shrink.css"></head>
+<body>
+<header><span>ZHI · OBJECT INSPECTOR</span><h1>收缩盒子</h1><p>让外框贴合内容，物体保持原位。</p></header>
+<main>
+<section class="selection"><strong id="selection">正在读取选择…</strong><p id="names"></p><button id="refresh" type="button">重新读取选择</button></section>
+<form id="options">
+<label>计算质量<select id="quality"><option value="fast">快速</option><option value="fine">精细 · 搜索更多方向</option></select></label>
+<label>共享定义<select id="scope"><option value="linked">修改所有相关定义（默认）</option><option value="unique">仅所选实例 · 必要时独立化</option></select></label>
+<label class="check"><input type="checkbox" id="nested" checked>同时考虑内部组／组件的轴向</label>
+<p class="hint" id="scope-help">同定义实例一起调整轴向与轴点，各自内容保持原位。</p>
+<button id="start" type="submit" class="primary" disabled>开始收缩</button>
+</form>
+<div id="progress" hidden><div class="activity" aria-hidden="true"></div><button id="cancel" type="button">取消计算</button></div>
+<p id="status" role="status" aria-live="polite">请选择一个或多个组／组件。</p>
+<ul id="results"></ul>
+<footer>隐藏与远处几何也会计入范围。<br>轴向和轴点可能改变；原有层级保留。</footer>
+</main><script src="shrink.js"></script>
+</body></html>

@@ -2,7 +2,7 @@
 param([switch]$Force)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
-$version = '1.1.0'
+$version = '1.2.0'
 $output = Join-Path $root "release/zhi-axis-inspector-$version.rbz"
 if ((Test-Path $output) -and -not $Force) { throw "包已存在，确认重建后添加 -Force：$output" }
 New-Item -ItemType Directory -Force (Split-Path $output -Parent) | Out-Null
